@@ -7,7 +7,6 @@ public class Answer {
     private String text;
     private ArrayList<String> sentences;
     private ArrayList<String> words;
-    private ArrayList<Fword> WordBucket;
     private double FkReadAbility;
 
     public Answer(String text){
