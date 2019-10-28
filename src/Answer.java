@@ -1,6 +1,7 @@
 import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.StringTokenizer;
 
 public class Answer {
     private String text;
@@ -13,7 +14,6 @@ public class Answer {
         this.text = text;
         this.sentences = CalcSentences();
         this.words = CalcWords();
-        this.WordBucket = createWordBucket();
         this.FkReadAbility = Readability.FKReadability(sentences);
     }
 
@@ -72,24 +72,6 @@ public class Answer {
         return words.contains(word);
     }
 
-    private ArrayList<Fword> createWordBucket(){
-        ArrayList<Fword> output = new ArrayList<>();
-        for (String word: words) {
-            if(!output.contains(word)){
-                Fword w = new Fword(word, 1);
-                output.add(w);
-            } else if(output.contains(word)){
-                int j = getIndex(output, word);
-                output.get(j).increment();
-            }
-        }
-        return output;
-    }
 
-    private int getIndex(ArrayList<Fword> words,String word){
-        for (int i = 0; i < words.size(); i++) {
-            if(words.equals(word)) return i;
-        }
-        return -1;
-    }
+
 }
