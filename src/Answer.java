@@ -7,7 +7,7 @@ public class Answer {
     private String text;
     private ArrayList<String> sentences;
     private ArrayList<String> words;
-    private double FkReadAbility;
+    public double FkReadAbility;
 
     public Answer(String text){
         this.text = text;
@@ -65,6 +65,10 @@ public class Answer {
             }
         }
         return words;
+    }
+
+    public double wordsSentRatio(){
+        return (double) CalcWords().size() / CalcSentences().size();
     }
 
     public boolean contains(String word){

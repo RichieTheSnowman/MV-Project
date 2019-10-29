@@ -5,14 +5,13 @@ public class Question {
     private String text;
     private ArrayList<String> words;
 
-    public Question(String text){
-        this.text = text;
+    public Question(String filename){
+        this.text = TextLib.readFileAsString(filename);
         this.words = CalcWords();
     }
 
-    public int SimilarityWithAnswers(){
+    public int similarityWithAnswers(ArrayList<Answer> answers){
         int count = 0;
-        ArrayList<Answer> answers = new ArrayList<>();
         for(Answer a : answers){
             for (int i = 0; i < words.size(); i++) {
                 if(a.contains(CalcWords().get(i))){

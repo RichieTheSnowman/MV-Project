@@ -3,10 +3,9 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Readability {
-    private static ArrayList<Sword> SyllableWords;
 
     public static void main(String[] args) {
-        SyllableWords = TextLib.readSyllablesFile("data/syllables.txt");
+        //SyllableWords = TextLib.readSyllablesFile("data/syllables.txt");
 
     }
 

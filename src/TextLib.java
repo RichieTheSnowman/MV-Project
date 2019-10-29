@@ -91,29 +91,7 @@ public class TextLib {
     }
 
     // Splits the whole block string into sentances
-    public static ArrayList<String> splitIntoSentences(String text) {
-        ArrayList<String> output = new ArrayList<>();
 
-        Locale locale = Locale.US;
-        BreakIterator breakIterator = BreakIterator.getSentenceInstance(locale);
-        breakIterator.setText(text);
-
-        int prevIndex = 0;
-        int boundaryIndex = breakIterator.first();
-        while(boundaryIndex != BreakIterator.DONE) {
-            String sentence = text.substring(prevIndex, boundaryIndex).trim();
-            if (sentence.length()>0)
-                output.add(sentence);
-            prevIndex = boundaryIndex;
-            boundaryIndex = breakIterator.next();
-        }
-
-        String sentence = text.substring(prevIndex).trim();
-        if (sentence.length()>0)
-            output.add(sentence);
-
-        return output;
-    }
 
     private static String getWordFromLine(String line) {
         return line.substring(0, line.indexOf("="));
