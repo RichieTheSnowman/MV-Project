@@ -1,12 +1,7 @@
-import oracle.jrockit.jfr.StringConstantPool;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.lang.reflect.Array;
-import java.text.BreakIterator;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class TextLib {
@@ -20,7 +15,7 @@ public class TextLib {
             scanner = new Scanner(new FileInputStream(filename), "UTF-8");
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                output.append(line.trim()+"\n");
+                output.append(line.trim() + "\n");
             }
 
             scanner.close();
@@ -33,7 +28,7 @@ public class TextLib {
     }
 
     // Read the Answers file and store everything about them into a String
-    public static Question readAnswersDoc(String filename){
+    public static Question readAnswersDoc(String filename) {
         ArrayList<Answer> Answers = new ArrayList<>();
         Scanner scanner;
         String q = "";
@@ -64,7 +59,7 @@ public class TextLib {
         return question;
     }
 
-    public static ArrayList<String> readDoc(String filename){
+    public static ArrayList<String> readDoc(String filename) {
         ArrayList<String> words = new ArrayList<>();
         Scanner scanner;
 
@@ -78,7 +73,7 @@ public class TextLib {
                 words.add(line);
             }
 
-        scanner.close();
+            scanner.close();
 
         } catch (FileNotFoundException e) {
             System.out.println("File not found " + filename);
@@ -86,9 +81,6 @@ public class TextLib {
         return words;
 
     }
-
-    // Reads the syllables file and stores the word and its respective number of
-
 
 
 }

@@ -4,9 +4,6 @@ import java.util.ArrayList;
 
 public class Readability {
 
-    public static void main(String[] args) {
-
-    }
 
     // Figure out readability
     public static double FKReadability(ArrayList<String> sentences, ArrayList<String> words) {
@@ -20,14 +17,6 @@ public class Readability {
     }
 
 
-    // Counts the words in the sentance, by seeing if the length of it is more than 0
-    public static int countWordsinSentence(String sentence) {
-        String[] words = breakSentenceintoWords(sentence);
-        return words.length;
-
-    }
-
-    // uses .split() method
     public static String[] breakSentenceintoWords(String sentence) {
         return sentence.split(" ");
     }
