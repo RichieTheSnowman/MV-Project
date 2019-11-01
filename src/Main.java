@@ -30,17 +30,23 @@ public class Main {
     private static ArrayList<Double> weight(Question q) {
         ArrayList<Double> list = new ArrayList<>();
         for (int i = 0; i < q.getAnswers().size(); i++) {
+            int dq = 0;
+            if(q.getAnswers().get(i).CalcWords().size() <= 5){
+                dq = - 50;
+            }
+
             double weighedRValue = (100 - q.getAnswers().get(i).getReadability());
             double weighedSentRatio = (q.getAnswers().get(i).wordsSentRatio());
             double weighedSwearWords = (q.getAnswers().get(i).countSpecificWords("data/swearWords.txt")) * 20;
             double weighedCueWordsCount = q.getAnswers().get(i).countSpecificWords("data/cueWords.txt");
             double weighedNumSameWordsInQuestSent = q.similarityWithAnswers() * 2;
 
-            double calc = weighedRValue + weighedSentRatio + weighedNumSameWordsInQuestSent - weighedSwearWords + weighedCueWordsCount;
+            double calc = dq + weighedRValue + weighedSentRatio + weighedNumSameWordsInQuestSent - weighedSwearWords + weighedCueWordsCount;
             list.add(calc);
         }
 
 
         return list;
     }
+
 }
