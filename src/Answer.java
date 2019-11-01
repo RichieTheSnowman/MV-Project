@@ -66,10 +66,10 @@ public class Answer {
         return words;
     }
 
-    private ArrayList<String> CalcWords(){
+    public ArrayList<String> CalcWords(){
         ArrayList<String> words = new ArrayList<>();
         for (String sentence: sentences) {
-            String[] word = sentence.split(". ");
+            String[] word = sentence.split(" ");
             ArrayList<String> result = stripandfixed(word);
             for (String w: result){
                 words.add(w);
@@ -103,7 +103,7 @@ public class Answer {
     public static String stripPuncuation(String word){
         String sword = "";
         for (int i = 0; i < word.length(); i++) {
-            String letter = word.substring(i,i+1);
+            String letter = word.substring(i, i+1);
             if(isletter(letter)) sword = sword + letter;
         }
         return sword;
@@ -116,9 +116,18 @@ public class Answer {
         return false;
     }
 
-    /*public int countSwearWords(){
+    public int countSpecificWords(String filename){
+        int count = 0;
+        ArrayList<String> str = TextLib.readDoc(filename);
+        for (int i = 0; i < CalcWords().size(); i++) {
+            for (int j = 0; j < str.size(); j++) {
+                if(CalcWords().get(i).equals(str.get(j))) count++;
+            }
 
-    }*/
+        }
+
+        return count;
+    }
 
 
 }

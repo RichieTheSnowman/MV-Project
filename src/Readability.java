@@ -10,21 +10,13 @@ public class Readability {
 
     // Figure out readability
     public static double FKReadability(ArrayList<String> sentences, ArrayList<String> words) {
-        double numwords = totalwords(sentences);
+        double numwords = words.size();
         double numsentences = sentences.size(); // sentences.size();
         double numsyllables = totalsyllables(sentences);
 
 
         double finalcalc = 206.835 - 1.015 * (numwords / numsentences) - 84.6 * (numsyllables / numwords);
         return finalcalc;
-    }
-
-    public static int totalwords(ArrayList<String> sentences) {
-        int numwords = 0;
-        for (String sentence : sentences) {
-            numwords += countWordsinSentence(sentence);
-        }
-        return numwords;
     }
 
 

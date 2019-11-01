@@ -64,21 +64,31 @@ public class TextLib {
         return question;
     }
 
+    public static ArrayList<String> readDoc(String filename){
+        ArrayList<String> words = new ArrayList<>();
+        Scanner scanner;
+
+
+        try {
+            scanner = new Scanner(new FileReader(filename));
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                line.trim();
+
+                words.add(line);
+            }
+
+        scanner.close();
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found " + filename);
+        }
+        return words;
+
+    }
+
     // Reads the syllables file and stores the word and its respective number of
 
 
-    private static int calcSyllables(String s){
-        int count = 1;
-        for (int i = 0; i < s.length(); i++) {
-            if(s.substring(i,i+1).equals("*")) count++;
-        }
-        return count;
-    }
 
-    // Splits the whole block string into sentances
-
-
-    private static String getWordFromLine(String line) {
-        return line.substring(0, line.indexOf("="));
-    }
 }
