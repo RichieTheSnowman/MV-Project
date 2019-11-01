@@ -19,7 +19,7 @@ public class Main {
     private static void printScores(Question q) {
         System.out.println("The question is: " + q.getQuestion());
         for (int i = 0; i < q.getAnswers().size(); i++) {
-            System.out.println(q.getAnswers().get(i).getText());
+            System.out.println("Answer " + (i+1) + ": " + q.getAnswers().get(i).getText());
 
         }
         System.out.println("Their respective scores are: " + weight(q));
