@@ -1,19 +1,29 @@
+import javax.xml.soap.Text;
+import java.lang.reflect.Array;
 import java.text.BreakIterator;
-import java.util.ArrayList;
-import java.util.Locale;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Answer {
     private String text;
     private ArrayList<String> sentences;
     private ArrayList<String> words;
-    public double FkReadAbility;
+    private double FkReadAbility;
 
     public Answer(String text){
         this.text = text;
         this.sentences = CalcSentences();
         this.words = CalcWords();
-        this.FkReadAbility = Readability.FKReadability(sentences);
+        this.FkReadAbility = Readability.FKReadability(sentences,words);
+    }
+
+    public String getText(){
+        return text;
+    }
+
+
+
+    public double getReadability(){
+        return FkReadAbility;
     }
 
     public int getNumSentences(){
@@ -58,10 +68,11 @@ public class Answer {
 
     private ArrayList<String> CalcWords(){
         ArrayList<String> words = new ArrayList<>();
-        for (int i = 0; i < sentences.size(); i++) {
-            String[] line = sentences.get(i).split(" ");
-            for (int j = 0; j < line.length; j++) {
-                words.add(line[i]);
+        for (String sentence: sentences) {
+            String[] word = sentence.split(". ");
+            ArrayList<String> result = stripandfixed(word);
+            for (String w: result){
+                words.add(w);
             }
         }
         return words;
@@ -75,6 +86,39 @@ public class Answer {
         return words.contains(word);
     }
 
+
+    public static ArrayList<String> stripandfixed(String[] words){
+        ArrayList<String> result = new ArrayList<>();
+        for(int i = 0; i < words.length; i++){
+            if(words[i].length() != 0){
+                String word = words[i].toLowerCase();
+                word = stripPuncuation(word);
+                result.add(word);
+            }
+        }
+        return result;
+    }
+
+    // Removes Puncuation
+    public static String stripPuncuation(String word){
+        String sword = "";
+        for (int i = 0; i < word.length(); i++) {
+            String letter = word.substring(i,i+1);
+            if(isletter(letter)) sword = sword + letter;
+        }
+        return sword;
+    }
+
+    // Tests if the String is a letter
+    private static boolean isletter(String letter) {
+        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        if(alphabet.contains(letter)) return true;
+        return false;
+    }
+
+    /*public int countSwearWords(){
+
+    }*/
 
 
 }

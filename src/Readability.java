@@ -5,18 +5,17 @@ import java.util.ArrayList;
 public class Readability {
 
     public static void main(String[] args) {
-        //SyllableWords = TextLib.readSyllablesFile("data/syllables.txt");
 
     }
 
     // Figure out readability
-    public static double FKReadability(ArrayList<String> sentences) {
-        int numwords = totalwords(sentences);
-        int numsentances = sentences.size();
-        int numsyllables = totalsyllables(sentences);
+    public static double FKReadability(ArrayList<String> sentences, ArrayList<String> words) {
+        double numwords = totalwords(sentences);
+        double numsentences = sentences.size(); // sentences.size();
+        double numsyllables = totalsyllables(sentences);
 
 
-        double finalcalc = 206.835 - 1.015 * (numwords / numsentances) - 84.6 * (numsyllables / numwords);
+        double finalcalc = 206.835 - 1.015 * (numwords / numsentences) - 84.6 * (numsyllables / numwords);
         return finalcalc;
     }
 
@@ -31,23 +30,22 @@ public class Readability {
 
     // Counts the words in the sentance, by seeing if the length of it is more than 0
     public static int countWordsinSentence(String sentence) {
-        String[] words = breakSentanceintoWords(sentence);
-        int count = 0;
-        for (String word : words) {
-            if (word.length() != 0) count++;
-        }
-        return count;
+        String[] words = breakSentenceintoWords(sentence);
+        return words.length;
+
     }
 
     // uses .split() method
-    public static String[] breakSentanceintoWords(String sentence) {
+    public static String[] breakSentenceintoWords(String sentence) {
         return sentence.split(" ");
     }
 
     private static int totalsyllables(ArrayList<String> sentences) {
         int totalSyllables = 0;
+
         for (String sentence : sentences) {
-            String[] a = sentence.split(" ");
+            String[] a = breakSentenceintoWords(sentence);
+
 
             for (int i = 0; i < a.length; i++) {
                 totalSyllables += syllablesFor(a[i]);

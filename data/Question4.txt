@@ -1,0 +1,5 @@
+What is integration and why is it the antiderivative?
+
+-Its the antiderivative.
+-Go to wikipedia, here https://en.wikipedia.org/wiki/Integral
+-In mathematics, an integral assigns numbers to functions in a way that can describe displacement, area, volume, and other concepts that arise by combining infinitesimal data. Integration is one of the two main operations of calculus, with its inverse operation, differentiation, being the other. Given a function f of a real variable x and an interval [a, b] of the real line, the definite integral is defined informally as the signed area of the region in the xy-plane that is bounded by the graph of f, the x-axis and the vertical lines x = a and x = b. The area above the x-axis adds to the total and that below the x-axis subtracts from the total. The operation of integration, up to an additive constant, is the inverse of the operation of differentiation. For this reason, the term integral may also refer to the related notion of antiderivative, a function F whose derivative is the given function f.

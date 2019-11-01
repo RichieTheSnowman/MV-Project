@@ -33,17 +33,25 @@ public class TextLib {
     }
 
     // Read the Answers file and store everything about them into a String
-    public static ArrayList<Answer> readAnswersDoc(String filename){
+    public static Question readAnswersDoc(String filename){
         ArrayList<Answer> Answers = new ArrayList<>();
         Scanner scanner;
+        String q = "";
 
         try {
+            int a = 0;
             scanner = new Scanner(new FileReader(filename));
-            scanner.nextLine();
             while (scanner.hasNextLine()) {
-                String text = scanner.nextLine();
+                if (a == 0) {
+                    q = scanner.nextLine();
+                    a = 1;
+                    scanner.nextLine();
+                    continue;
+                }
 
-                Answer A = new Answer(text);
+                String answer = scanner.nextLine();
+
+                Answer A = new Answer(answer);
                 Answers.add(A);
             }
 
@@ -52,35 +60,12 @@ public class TextLib {
         } catch (FileNotFoundException e) {
             System.out.println("File not found " + filename);
         }
-        return Answers;
+        Question question = new Question(q, Answers);
+        return question;
     }
 
     // Reads the syllables file and stores the word and its respective number of
-    public static ArrayList<Sword> readSyllablesFile(String filename){
-        ArrayList<Sword> Words = new ArrayList<>();
-        Scanner scanner;
 
-        try {
-            scanner = new Scanner(new FileReader(filename));
-            scanner.nextLine();
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] info = line.split("=");
-                String word = info[0].trim();
-                int syllables = calcSyllables(info[1]);
-
-
-                Sword w = new Sword(word, syllables);
-                Words.add(w);
-            }
-
-            scanner.close();
-
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found " + filename);
-        }
-        return Words;
-    }
 
     private static int calcSyllables(String s){
         int count = 1;
