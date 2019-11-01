@@ -11,29 +11,40 @@ public class Main {
         Question Q3 = TextLib.readAnswersDoc("data/Question3.txt");
         Question Q4 = TextLib.readAnswersDoc("data/Question4.txt");
 
-        System.out.println(Q1.getAnswers().get(0).getText());
-        System.out.println(Q1.getAnswers().get(1).getText());
-        System.out.println(Q1.getAnswers().get(2).getText());
-        System.out.println(Q1.getAnswers().get(2).CalcWords());
-        System.out.println(weight(Q2));
+
+        printScores(Q1);
+        printScores(Q2);
+        printScores(Q3);
+        printScores(Q4);
+
+        //System.out.println(weight(Q2));
 
         //System.out.println(countSwearWords());
     }
 
+    private static void printScores(Question q) {
+        System.out.println("The question is: " + q.getQuestion());
+        for (int i = 0; i < q.getAnswers().size(); i++) {
+            System.out.println(q.getAnswers().get(i).getText());
 
-   private static ArrayList<Double> weight(Question q) {
+        }System.out.println("Their respective scores are: " + weight(q));
+        System.out.println();
+    }
+
+
+    private static ArrayList<Double> weight(Question q) {
         ArrayList<Double> list = new ArrayList<>();
        for (int i = 0; i < q.getAnswers().size(); i++) {
            double weighedRValue = (100 - q.getAnswers().get(i).getReadability()) * 0.25;
            double weighedSentRatio = (q.getAnswers().get(i).wordsSentRatio() * 0.5);
            double weighedSwearWords = (q.getAnswers().get(i).countSpecificWords("data/swearWords.txt")) * 5;
            double weighedCueWordsCount = q.getAnswers().get(i).countSpecificWords("data/cueWords.txt");
-           double weighedNumSameWordsInQuestSent = q.similarityWithAnswers()* 0.1;
+           double weighedNumSameWordsInQuestSent = q.similarityWithAnswers()* 5;
 
            double calc = weighedRValue+weighedSentRatio+weighedNumSameWordsInQuestSent - weighedSwearWords + weighedCueWordsCount;
            list.add(calc);
        }
-       
+
 
 
         return list;
