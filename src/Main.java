@@ -30,11 +30,11 @@ public class Main {
     private static ArrayList<Double> weight(Question q) {
         ArrayList<Double> list = new ArrayList<>();
         for (int i = 0; i < q.getAnswers().size(); i++) {
-            double weighedRValue = (100 - q.getAnswers().get(i).getReadability()) * 0.25;
-            double weighedSentRatio = (q.getAnswers().get(i).wordsSentRatio() * 0.5);
-            double weighedSwearWords = (q.getAnswers().get(i).countSpecificWords("data/swearWords.txt")) * 5;
+            double weighedRValue = (100 - q.getAnswers().get(i).getReadability());
+            double weighedSentRatio = (q.getAnswers().get(i).wordsSentRatio());
+            double weighedSwearWords = (q.getAnswers().get(i).countSpecificWords("data/swearWords.txt")) * 20;
             double weighedCueWordsCount = q.getAnswers().get(i).countSpecificWords("data/cueWords.txt");
-            double weighedNumSameWordsInQuestSent = q.similarityWithAnswers() * 5;
+            double weighedNumSameWordsInQuestSent = q.similarityWithAnswers() * 2;
 
             double calc = weighedRValue + weighedSentRatio + weighedNumSameWordsInQuestSent - weighedSwearWords + weighedCueWordsCount;
             list.add(calc);
