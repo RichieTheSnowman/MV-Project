@@ -37,7 +37,7 @@ public class Main {
 
             double weighedRValue = (100 - q.getAnswers().get(i).getReadability());
             double weighedSentRatio = (q.getAnswers().get(i).wordsSentRatio());
-            double weighedSwearWords = (q.getAnswers().get(i).countSpecificWords("data/swearWords.txt")) * 20;
+            double weighedSwearWords = (q.getAnswers().get(i).countSpecificWords("data/swearWords.txt")) * 50;
             double weighedCueWordsCount = q.getAnswers().get(i).countSpecificWords("data/cueWords.txt");
             double weighedNumSameWordsInQuestSent = q.similarityWithAnswers() * 2;
 
