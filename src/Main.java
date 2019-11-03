@@ -18,15 +18,34 @@ public class Main {
 
         }
 
-        ArrayList<ScoreAnswer> answers1 = reOrderbybest(Trials.get(0).getAnswers(), Score(Trials.get(0)));
-        ArrayList<ScoreAnswer> answers2 = reOrderbybest(Trials.get(2).getAnswers(), Score(Trials.get(2)));
-        ArrayList<ScoreAnswer> answers3 = reOrderbybest(Trials.get(3).getAnswers(), Score(Trials.get(3)));
+        ArrayList<ScoreAnswer> answers1 = organizeAsScoreAnswer(Trials.get(0).getAnswers(), Score(Trials.get(0)));
+        ArrayList<ScoreAnswer> answers2 = organizeAsScoreAnswer(Trials.get(1).getAnswers(), Score(Trials.get(1)));
+        ArrayList<ScoreAnswer> answers3 = organizeAsScoreAnswer(Trials.get(2).getAnswers(), Score(Trials.get(2)));
+        ArrayList<ScoreAnswer> answers4 = organizeAsScoreAnswer(Trials.get(3).getAnswers(), Score(Trials.get(3)));
+
+
+        System.out.println(Correctness(Trials.get(0).getAnswers()), answers1.get(0).a);
+
+        //System.out.println(answers1.get(0).a.getText() + answers1.get(0).score );
+        //System.out.println(answers1.get(1).a.getText() + answers1.get(1).score);
+        //System.out.println(answers1.get(2).a.getText() + answers1.get(2).score);
 
 
 
 
 
 
+
+    }
+
+    private static double Correctness(ArrayList<Answer> answers1, ArrayList<Answer> answers2) {
+        double count = 0;
+        for (int i = 0; i < answers1.size(); i++) {
+            if(answers1.get(i).getText().equals(answers2.get(i).getText())){
+                count++;
+            }
+        }
+        return count;
     }
 
     private static void printScores(Question q) {
@@ -61,37 +80,31 @@ public class Main {
     }
 
 
-    private static ArrayList<ScoreAnswer> reOrderbybest(ArrayList<Answer> answers, ArrayList<Double> scores){
-        ArrayList<ScoreAnswer> reOrder = new ArrayList<>();
+    private static ArrayList<ScoreAnswer> organizeAsScoreAnswer(ArrayList<Answer> answers, ArrayList<Double> scores){
+        ArrayList<ScoreAnswer> list = new ArrayList<>();
         for (int i = 0; i < answers.size(); i++) {
             ScoreAnswer a = new ScoreAnswer(scores.get(i), answers.get(i));
-            reOrder.add(a);
+            list.add(a);
         }
 
-        return reOrder;
+        reOrderbybest(list);
+
+        return list;
     }
 
-
-
-
-
-    private static Double[] ListtoArray(ArrayList<Double>scores){
-        Double[] output = new Double[scores.size()];
-        for (int i = 0; i < scores.size(); i++) {
-            output[i] = scores.get(i);
+    private static void reOrderbybest(ArrayList<ScoreAnswer> a){
+        int n = a.size();
+        for (int i = 0; i < n-1; i++) {
+            for (int j = 0; j < n-1-i; j++) {
+                if(a.get(j).score < a.get(j+1).score){
+                    Collections.swap(a, j,j+1);
+                }
+            }
         }
-        return output;
+
+
     }
 
-
-
-    private static int getIndexOfGreatest(ArrayList<Double> scores){
-        int largest = 0;
-        for (int i = 0; i < scores.size(); i++) {
-            if(scores.get(largest) < scores.get(i)) largest = i;
-        }
-        return largest;
-    }
 
 
     private static double correctness(ArrayList<String> correct, ArrayList<String> answers){
