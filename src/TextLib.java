@@ -82,5 +82,26 @@ public class TextLib {
 
     }
 
+    public static ArrayList<String> readCorrect(String filename) {
+        ArrayList<String> Answers = new ArrayList<>();
+        Scanner scanner;
+        try {
+            scanner = new Scanner(new FileReader(filename));
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                line.trim();
+
+                Answers.add(line);
+            }
+
+            scanner.close();
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found " + filename);
+        }
+        return Answers;
+
+    }
+
 
 }

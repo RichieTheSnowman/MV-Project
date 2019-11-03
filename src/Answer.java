@@ -119,6 +119,14 @@ public class Answer {
         return count;
     }
 
+    /*public boolean redFlagWords(String filename){
+        ArrayList<String> str = TextLib.readDoc(filename);
+        for (int i = 0; i < CalcWords().size(); i++) {
+
+
+        }
+    }*/
+
 
 
 
