@@ -18,33 +18,44 @@ public class Main {
 
         }
 
+
+
         ArrayList<ScoreAnswer> answers1 = organizeAsScoreAnswer(Trials.get(0).getAnswers(), Score(Trials.get(0)));
         ArrayList<ScoreAnswer> answers2 = organizeAsScoreAnswer(Trials.get(1).getAnswers(), Score(Trials.get(1)));
         ArrayList<ScoreAnswer> answers3 = organizeAsScoreAnswer(Trials.get(2).getAnswers(), Score(Trials.get(2)));
         ArrayList<ScoreAnswer> answers4 = organizeAsScoreAnswer(Trials.get(3).getAnswers(), Score(Trials.get(3)));
 
-
-        System.out.println(Correctness(Trials.get(0).getAnswers()), answers1.get(0).a);
-
-        //System.out.println(answers1.get(0).a.getText() + answers1.get(0).score );
-        //System.out.println(answers1.get(1).a.getText() + answers1.get(1).score);
-        //System.out.println(answers1.get(2).a.getText() + answers1.get(2).score);
+        ArrayList<String> Correct1 = TextLib.readDoc("data/CorrectOrder/CorrectOrder1.txt");
+        ArrayList<String> Correct2 = TextLib.readDoc("data/CorrectOrder/CorrectOrder2.txt");
+        ArrayList<String> Correct3 = TextLib.readDoc("data/CorrectOrder/CorrectOrder3.txt");
+        ArrayList<String> Correct4 = TextLib.readDoc("data/CorrectOrder/CorrectOrder4.txt");
 
 
+        int count = 0;
+        int total = answers1.size()+answers2.size()+answers3.size()+answers4.size();
+        for (int i = 0; i < answers1.size(); i++) {
+            count += Correctness(Correct1.get(i), answers1.get(i).a.getText());
+        }
+        for (int i = 0; i < answers2.size(); i++) {
+            count += Correctness(Correct2.get(i), answers2.get(i).a.getText());
+        }
+        for (int i = 0; i < answers3.size(); i++) {
+            count += Correctness(Correct3.get(i), answers3.get(i).a.getText());
+        }
+        for (int i = 0; i < answers4.size(); i++) {
+            count += Correctness(Correct4.get(i), answers4.get(i).a.getText());
+        }
 
-
-
-
+        System.out.println("The Percentage is: " + (double)count/total);
 
     }
 
-    private static double Correctness(ArrayList<Answer> answers1, ArrayList<Answer> answers2) {
-        double count = 0;
-        for (int i = 0; i < answers1.size(); i++) {
-            if(answers1.get(i).getText().equals(answers2.get(i).getText())){
-                count++;
-            }
+    private static int Correctness(String answers1, String answers2) {
+        int count = 0;
+        if(answers1.equals(answers2)){
+            count++;
         }
+
         return count;
     }
 
@@ -66,7 +77,6 @@ public class Main {
             if(q.getAnswers().get(i).CalcWords().size() <= 5){
                 dq = - 50;
             }
-
             double weighedRValue = (100 - q.getAnswers().get(i).getReadability());
             double weighedSentRatio = (q.getAnswers().get(i).wordsSentRatio());
             double weighedSwearWords = (q.getAnswers().get(i).countSpecificWords("data/swearWords.txt")) * 50;
