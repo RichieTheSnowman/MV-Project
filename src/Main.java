@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 public class Main {
@@ -17,7 +16,6 @@ public class Main {
             printScores(q);
 
         }
-
 
 
         ArrayList<ScoreAnswer> answers1 = organizeAsScoreAnswer(Trials.get(0).getAnswers(), Score(Trials.get(0)));
@@ -115,14 +113,5 @@ public class Main {
 
     }
 
-
-
-    private static double correctness(ArrayList<String> correct, ArrayList<String> answers){
-        int count = 0;
-        for (int i = 0; i < correct.size(); i++) {
-            if(correct.get(i).equals(answers.get(i))) count++;
-        }
-        return count;
-    }
 
 }
